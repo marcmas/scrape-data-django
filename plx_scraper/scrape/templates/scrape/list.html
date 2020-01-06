@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+<br>
+<label>Aktualizuj bazę z poniżej podanej lokalizacji</label>
+<br>
+<label>Wpisz frazę jaką chcesz zaaktualizować</label>
+<br>
+<form method="POST" action="{% url 'scrape:add_files' %}" class="form-inline">
+    {% csrf_token %}
+    <input class="form-control mr-sm-2" name="choice" type="text" minlength="4" required>
+    <button class="btn btn-outline-success my-2 my-sm-0" value="Search" type="submit" onclick="return confirm('Are you sure？')">Aktualizuj bazę danych</button>
+</form>
+{% comment %} <a id="confirm_button" href="{% url 'scrape:add_files' %}" class="btn-lg btn-danger mt-100" onclick="return confirm('Are you sure？')">Aktualizuj bazę danych</a> {% endcomment %}
+<br>
+<label>Aktualna lokaliacja pobierania danych</label>
+<input class="form-control" value="{{path}}" type="text" placeholder="{{path}}" disabled>
+<br>
+<a href="{% url 'scrape:change_path' path.id %}" onclick="return confirm('Are you sure?')" class="btn btn-primary btn-l">Zmień lokalizację</a>
+<br>
+<form method="GET" action="" class="form-inline d-flex justify-content-center">
+    <input class="form-control mr-sm-2" name="q" type="text" placeholder="Search" value="{% if request.GET.q %}{{ query }}{% endif %}" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" value="Search" type="submit">Search</button>
+</form>
+<label for="">Wszystkie pliki w bazie: <b>{{ count_files }}</b></label>
+<br>
+<table class="table table-sm table-light">
+    <thead>
+        <tr>
+            <th scope="col">PLX</th>
+            <th scope="col">PLX_FGK</th>
+            <th scope="col">FILE_NAME</th>
+            <th scope="col">N</th>
+            <th scope="col">1</th>
+            <th scope="col">Copy</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for file in files %}
+        <tr>
+            <td scope="row">PLX</td>
+            <td scope="row">PLX_FGK</td>
+            <td id="myInput">{{file.file_name}}</td>
+            <td>N</td>
+            <td>1</td>
+            <td><button class="btn btn-secondary copy-btn">Copy</button></td>
+        </tr>
+        {% endfor %}
+
+    </tbody>
+</table>
+{% endblock content %}

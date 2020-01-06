@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="form-row">
+        <div class="col-md-4 mb-3">
+            <label>Data wyjścia</label>
+            <input type="text" class="form-control" id="validationCustom01" value="{{unique_certificate.leave_date}}" disabled>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label>Godzina wyjścia</label>
+            <input type="text" class="form-control" id="validationCustom01" value="{{unique_certificate.leave_hour}}" disabled>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label>Godzina Przyjścia</label>
+            <input type="text" class="form-control" id="validationCustom01" 
+            value="{% if unique_certificate.return_hour is None %}Brak danych{% else %}{{unique_certificate.return_hour}}{% endif %}" disabled>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-4 mb-3">
+            <label>Imię</label>
+            <input type="text" class="form-control" id="validationCustom01" value="{{unique_certificate.user.first_name}}" disabled>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label>Nazwisko</label>
+            <input type="text" class="form-control" id="validationCustom01" value="{{unique_certificate.user.last_name}}" disabled>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label>Stanowisko</label>
+            <input type="text" class="form-control" id="validationCustom01" value="{{unique_certificate.user.profile.position}}" disabled>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-4 mb-3">
+            <label>Status</label>
+            <input style="{% if unique_certificate.accept is True %}color:#52de12; font-weight:bold;{% else %}color:red; font-weight:bold;{% endif %}" 
+                type="text" class="form-control" id="validationCustom01" value="{% if unique_certificate.accept is True %}Zaakceptowany{% else %}Niezaakceptowany{% endif %}" disabled>
+        </div>
+    </div>
+    <br>
+
+    <a class="btn btn-success {% if unique_certificate.accept is True %} disabled {% else %}{% endif %}" href="{{ unique_certificate.get_accept_url }}" onclick="return confirm('Are you sure?')">
+        Zatwierdź wniosek
+    </a>
+    <a class="btn btn-danger {% if unique_certificate.accept is True %} disabled {% else %}{% endif %}" href="{{ unique_certificate.get_delete_url }}" onclick="return confirm('Are you sure?')">
+        Usuń wniosek
+    </a>
+    
+    <div class="btn-group" role="group">
+        <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">PDF</button>
+        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+            <a class="dropdown-item btn btn-primary" id="postYourAdd" onclick="postYourAdd()">PDF on the current page</a>
+            <a class="dropdown-item btn-dark" id="postYourAdd" target="_blank" href="{{unique_certificate.get_download_pdf_url}}">PDF Download</a>
+            <a class="dropdown-item btn-dark" id="postYourAdd" target="_blank" href="{{unique_certificate.get_pdf_url}}">PDF on the NEW page</a>
+        </div>
+    </div>
+
+    <br><br>
+
+    <iframe id="forPostyouradd" data-src="{{unique_certificate.get_pdf_url}}" src="about:blank" frameborder="0" height="100%" width="100%" onload='resizeIframe(this)'></iframe>
+    <br>
+    <br>
+    <script>
+        function resizeIframe(obj) {
+            obj.style.height = '1200px';
+        }
+    </script>
+    <script>
+        function postYourAdd () {
+            var iframe = $("#forPostyouradd");
+            iframe.attr("src", iframe.data("src"));
+            }
+    </script>
+{% endblock content %}

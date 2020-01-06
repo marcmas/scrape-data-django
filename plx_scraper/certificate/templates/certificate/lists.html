@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="btn-group" role="group">
+    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Filtruj
+    </button>
+    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+      <a class="dropdown-item" href="{% url 'certificate:lists' %}">Wszystkie</a>
+      <a class="dropdown-item" href="{% url 'certificate:confirm_lists' %}">Zaakceptowane</a>
+      <a class="dropdown-item" href="{% url 'certificate:cancle_lists' %}">Niezaakceptowane</a>
+    </div>
+</div>
+<br><br>
+{% if all_certificate %}
+    <table class="table table-borderless table-light table-responsive w-100 d-block d-md-table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Data wyjścia</th>
+                <th scope="col">Godzina wyjścia</th>
+                <th scope="col">Godzina przyjścia</th>
+                <th scope="col">Imię</th>
+                <th scope="col">Nazwisko</th>
+                <th scope="col">Stanowisko</th>
+                <th scope="col">Szczegóły</th>
+            </tr>
+        </thead>
+        <tbody>
+    {% for certif in all_certificate %}
+            <tr>
+                <td>{{certif.leave_date}}</td>
+                <td>{{certif.leave_hour}}</td>     
+                <td>{% if not certif.return_hour is None %} {{certif.return_hour}} {% else %} Brak danych {% endif %}</td>
+                <td>{{certif.user.first_name}}</td>
+                <td>{{certif.user.last_name}}</td>
+                <td>{{certif.user.profile.position}}</td>
+                <td><a class="btn btn-primary" href="{{ certif.get_absolute_url }}">Zobacz</a></td>
+            </tr>
+    {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <h1>No certificate available</h1>
+{% endif %}
+
+{% endblock content %}
