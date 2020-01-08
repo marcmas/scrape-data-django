@@ -4,7 +4,9 @@ from .models import Files, Path
 from django.urls import reverse
 from .forms import PathModelForm
 from django.contrib import messages
+from django.db.models import Q
 import os
+import operator
 
 
 # Create your views here.
@@ -21,11 +23,14 @@ def scrape(request):
 
     # Search data from files table
     query = request.GET.get("q")
+
     if query:
-        files = all_files.filter(file_name__icontains=query)
+        files = all_files.filter(file_name__iregex=query)
+    else:
+        files = all_files.all()[:50]
 
     context = {
-        'files': files[:15],
+        'files': files[:50],
         'path': path,
         'query': query,
         'count_files': count_files
