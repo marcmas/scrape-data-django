@@ -1,5 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
+<style>
+.search-info{
+    font-size: 12px;
+    text-align: center;
+}
+</style>
 <br>
 <label>Aktualizuj bazę z poniżej podanej lokalizacji</label>
 <br>
@@ -17,6 +23,7 @@
 <br>
 <a href="{% url 'scrape:change_path' path.id %}" onclick="return confirm('Are you sure?')" class="btn btn-primary btn-l">Zmień lokalizację</a>
 <br>
+<p class="search-info">Aby przeszukać pomiędzy wyrazami użyj <b style="font-size:20px;">.*</b> </p>
 <form method="GET" action="" class="form-inline d-flex justify-content-center">
     <input class="form-control mr-sm-2" name="q" type="text" placeholder="Search" value="{% if request.GET.q %}{{ query }}{% endif %}" aria-label="Search">
     <button class="btn btn-outline-success my-2 my-sm-0" value="Search" type="submit">Search</button>
