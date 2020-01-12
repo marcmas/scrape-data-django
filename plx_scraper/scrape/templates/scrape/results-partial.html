@@ -1,0 +1,32 @@
+{% load static %}
+
+{% if files %}
+<table class="table table-sm table-light">
+    <thead>
+        <tr>
+            <th scope="col">PLX</th>
+            <th scope="col">PLX_FGK</th>
+            <th scope="col">FILE_NAME</th>
+            <th scope="col">N</th>
+            <th scope="col">1</th>
+            <th scope="col" class="text-right">Kopiuj</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for file in files %}
+        <tr>
+            <td scope="row">{{file.column_one}}</td>
+            <td scope="row">{{file.column_two}}</td>
+            <td id="myInput">{{file.file_name}}</td>
+            <td>{{file.column_three}}</td>
+            <td>{{file.column_four}}</td>
+            <td class="text-right"><button class="btn btn-secondary copy-btn">Kopiuj</button></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+    <p>No artists found.</p>
+{% endif %}
+
+<script type="text/javascript" src='{% static "javascript/copy.js" %}'></script>

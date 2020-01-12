@@ -25,7 +25,7 @@
     <div class="float-right">Stanowisko: {{cert.user.profile.position}}</div><br>
     <div class="margin"></div>
     
-    <h3>Prosze o wyjscie z pracy dnia {{cert.leave_date}} od godziny {{cert.leave_hour}} do godziny {% if cert.return_hour is None %}16:00{% else %}{{cert.return_hour}}{% endif %}.</h3>
+    <h3>Prosze o wyjście z pracy dnia {{cert.leave_date}} od godziny {{cert.leave_hour}} do godziny {% if cert.return_hour is None %}16:00{% else %}{{cert.return_hour}}{% endif %}.</h3>
     <br>
     <h3 style="{% if cert.accept is True %}color:#52de12; font-weight:bold;{% else %}color:red; font-weight:bold;{% endif %}">Wniosek: {% if cert.accept is True %}Zaakceptowany{% else %}Niezaakceptowany{% endif %}</h3>
     <div class="margin"></div>

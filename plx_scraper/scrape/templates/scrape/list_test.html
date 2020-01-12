@@ -24,15 +24,36 @@
 <a href="{% url 'scrape:change_path' path.id %}" onclick="return confirm('Are you sure?')" class="btn btn-primary btn-l">Zmień lokalizację</a>
 <br>
 <p class="search-info">Aby przeszukać pomiędzy wyrazami użyj <b style="font-size:20px;">%</b> </p>
-<form class="form-inline justify-content-center">
-    <i id="search-icon" class="fas fa-search" aria-hidden="true"></i>
-    <input id="user-input" class="form-control form-control-lg ml-3 w-50" type="text" placeholder="Search" aria-label="Search">
-</form>
-<br>
-<label for="">Wszystkie pliki w bazie: <b>{{ count_files }}</b></label>
 
+<form method="GET" action="" class="form-inline d-flex justify-content-center">
+    <input class="form-control mr-sm-2" name="q" type="text" placeholder="Search" value="{% if request.GET.q %}{{ query }}{% endif %}" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" value="Search" type="submit">Search</button>
+</form> 
+
+<label for="">Wszystkie pliki w bazie: <b>{{ count_files }}</b></label>
 <br>
-<div id="replaceable-content" class="col-12">
-    {% include 'scrape/results-partial.html' %}
-</div>
+<table class="table table-sm table-light">
+    <thead>
+        <tr>
+            <th scope="col">PLX</th>
+            <th scope="col">PLX_FGK</th>
+            <th scope="col">FILE_NAME</th>
+            <th scope="col">N</th>
+            <th scope="col">1</th>
+            <th scope="col">Copy</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for file in files %}
+        <tr>
+            <td scope="row">PLX</td>
+            <td scope="row">PLX_FGK</td>
+            <td id="myInput">{{file.file_name}}</td>
+            <td>N</td>
+            <td>1</td>
+            <td><button class="btn btn-secondary copy-btn">Copy</button></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock content %}

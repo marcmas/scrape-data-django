@@ -130,14 +130,30 @@ X_FRAME_OPTIONS = 'ALLOW-FROM https://http://127.0.0.1:8000/certificate/'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/static/'
+# STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static_in_env')
-]
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'static/')
+# ]
+
 VENV_PATH = os.path.dirname(BASE_DIR)
 
 STATIC_ROOT = os.path.join(VENV_PATH, 'static_root')
+
+
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    # Don't forget to use absolute paths, not relative paths.
+    os.path.join(BASE_DIR, "static/"),
+    os.path.join(BASE_DIR, "static/plx_scraper/"), # this is for static/plx_scraper/main.css
+)
+
+STATICFILES_FINDERS = [
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+]
+
 
 
 MEDIA_URL = '/media/'
