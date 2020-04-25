@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+    .margin{
+        margin-bottom: 100px;
+    }
+    </style>
+</head>
+<body>
+
+    <div class="float-left"><b>Dane pracownika: </b>{{cert.user.first_name}} {{cert.user.last_name}}</div>
+    <div class="float-right">Dyrektor Generalny</div><br>
+    <div class="float-left"><b>SAP Number:</b> {{cert.user.profile.sap_number}}</div>
+    <div class="float-right">{{cert.user.firm.name}}</div><br>
+    <div class="float-left"><b>Stanowisko:</b> {{cert.user.profile.position}}</div><br>
+    
+    <div class="margin"></div>
+    <h1 class="text-center">PROŚBA</h1>
+    <div class="margin"></div>
+    
+    <h5>Prosze o udzielenie mi przepustki jednorazowej w dniu {{cert.leave_date}}</h5>
+    <h5>Od godziny {{cert.leave_hour}} do godziny {% if cert.return_hour is None %}16:00{% else %}{{cert.return_hour}}{% endif %}.</h5>
+    <h5>Ilość godzin ......</h5>
+    <h5>Godziny przepustki proszę rozliczyć z nadgodzinami</h5>
+    <h5>W przypadku braku nadgodzin proszę odliczyć z limitu godzin pracy w okresie rozliczeniowym</h5>
+    <br>
+    <div class="margin"></div>
+
+    <div class="float-left">...........................................</div>
+    <div class="float-right">.........................................</div><br>
+    <div class="float-left"><small>Podpis pracownika</small></div>
+    <div class="float-right"><small>Podpis kierownika</small></div><br>
+    <br>
+    <h3 style="{% if cert.accept is True %}color:#52de12; font-weight:bold;{% else %}color:red; font-weight:bold;{% endif %}" class="text-center">Wniosek: {% if cert.accept is True %}Zaakceptowany{% else %}Niezaakceptowany{% endif %}</h3>
+
+</body>
+</html>

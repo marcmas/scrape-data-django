@@ -1,0 +1,37 @@
+{% load static %}
+
+{% if files %}
+<p class="float-left mb-1">Licznik wyszukanych elementów: <span class="badge badge-warning"><b>{{ files.count }}</b></span></p>
+<p class="search-info float-right mb-1">Po wpisaniu frazy tabela wyświetla maksymalnie <b style="font-size:18px;">80</b> rekordów</p>
+<div class="table-responsive">
+<table class="table table-hover table-sm table-bordered w-100">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">PLX</th>
+            <th scope="col">PLX_FGK</th>
+            <th scope="col">FILE_NAME</th>
+            <th scope="col">N</th>
+            <th scope="col">1</th>
+            <th scope="col" class="text-center">Kopiuj</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for file in files %}
+        <tr>
+            <td scope="row">{{file.column_one}}</td>
+            <td scope="row">{{file.column_two}}</td>
+            <td id="myInput">{{file.file_name}}</td>
+            <td>{{file.column_three}}</td>
+            <td>{{file.column_four}}</td>
+            <td class="text-center"><button class="btn btn-outline-secondary btn-block copy-btn">Kopiuj</button></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+{% else %}
+    <br>
+    <h3 class="text-center">Brak plików w bazie o takiej nazwie</h3>
+{% endif %}
+
+<script type="text/javascript" src='{% static "javascript/copy.js" %}'></script>

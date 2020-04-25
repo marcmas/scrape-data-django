@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+a.disabled {
+  pointer-events: none;
+  cursor: default;
+}
+.search-info{
+    font-size: 12px;
+    text-align: center;
+}
+</style>
+<div style="display:none;" class="show-hide">
+    <div class="d-flex justify-content-between">
+        <div class="alert alert-success mr-1 mb-0" role="alert">
+          Aktualizuj bazę z poniżej podanej lokalizacji<br>
+          Poniżej wpisz frazę jaką chcesz zaaktualizować
+        </div>
+        <div class="alert alert-info pt-3" role="alert">
+          Wszystkie pliki w bazie: <b>{{ count_files }}</b>
+        </div>
+    </div>
+    <div class="d-flex justify-content-between">
+        <form method="POST" action="{% url 'scrape:add_files' %}" class="form-inline">
+            {% csrf_token %}
+            <input class="form-control mr-sm-2" name="choice" type="text" minlength="4" required>
+            <button class="btn btn-outline-success my-1 my-sm-0" value="Search" type="submit" onclick="return confirm('Are you sure？')">Aktualizuj bazę danych</button>
+        </form>
+        <a id="confirm_button" href="{% url 'scrape:add_all_files' %}" class="btn-lg btn-danger {% if not user.is_authenticated %} disabled {% endif %}" onclick="return confirm('Are you sure？')">Aktualizuj całą bazę danych</a>
+    </div>
+
+    <label class="mt-2 mb-0">Aktualna lokaliacja pobierania danych</label>
+    <input class="form-control m-0" value="{{path}}" type="text" placeholder="{{path}}" disabled>
+    <a href="{% url 'scrape:change_path' path.id %}" onclick="return confirm('Are you sure?')" class="btn btn-primary mt-2 btn-l {% if not user.is_authenticated %} disabled {% endif %}">Zmień lokalizację</a>
+    <br><button class="btn btn-warning float-right" id="hide">Ukryj panel</button>
+</div>
+<button class="btn btn-primary btn-lg float-right" id="show">Pokaż panel</button>
+<p class="search-info m-0">Użyj znaku<b style="font-size:20px;"> %</b>, aby szukać między wyrazem</p>
+<form class="form-inline justify-content-center">
+    <i id="search-icon" class="fas fa-search" aria-hidden="true"></i>
+    <input id="user-input" class="form-control form-control-lg ml-3 w-50" type="text" placeholder="Szukaj" aria-label="Search">
+</form>
+<br>
+
+<div id="replaceable-content" class="col-12 m-0">
+    {% include 'scrape/results-partial.html' %}
+</div>
+
+
+<script>
+$(document).ready(function(){
+    $("#hide").click(function(){
+        $(".show-hide").hide(300);
+        $("#show").show();
+    });
+  
+    $("#show").click(function(){
+        $(".show-hide").show(300);
+        $("#show").hide();
+    });
+});
+
+</script>
+{% endblock content %}
