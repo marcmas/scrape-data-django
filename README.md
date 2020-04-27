@@ -2,7 +2,9 @@
 
 #### The project was created to improve mapping work in the current job.
 #### Project where we download the data from the local folder needed for mapping.
-#### We can filter the download data by AJAX and copy selected row
+#### Users can filter the download data by AJAX and copy selected row
+#### In this program users can change the path where the data will be collected from
+#### Users can update current datebase if new files appeared in the path (buttons visible on the screenshot)
 
 # Getting Started
 
