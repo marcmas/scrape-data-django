@@ -8,43 +8,6 @@ from django.template.loader import render_to_string
 
 import os
 
-# Create your views here.
-# def test_view(request):
-    
-    # # Path value
-    # path = Path.objects.filter().first()
-    # # First 15 files values
-    # files = Files.objects.all()[:15]
-    # # All files values 
-    # all_files = Files.objects.all()
-    # # Count all files
-    # count_files = Files.objects.all().count()
-
-    # # Search data from files table
-    # query = request.GET.get("q")
-    
-    # # Check query True
-    # if query:
-        # if "%" in query:
-            # # Change a query "%" to ".*" regex
-            # query = query.replace("%", ".*")
-            # files = all_files.filter(file_name__iregex=query)
-            # query = query.replace(".*", "%")
-        # elif "%" not in query:
-            # files = all_files.filter(file_name__icontains=query)
-        # else:
-            # files = all_files.all()[:50]
-        
-    # context = {
-        # 'files': files[:100],
-        # 'path': path,
-        # 'query': query,
-        # 'count_files': count_files
-    # }
-
-    # return render(request, "scrape/list.html", context)
-
-
 def scrape(request):
 
     # Path value

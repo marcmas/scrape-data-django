@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
     'scrape',
-    'certificate',
     'pages',
 
 ]
@@ -123,8 +122,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-X_FRAME_OPTIONS = 'ALLOW-FROM https://http://127.0.0.1:8000/certificate/ http://192.168.27.100:8000/certificate/'
 
 
 # Static files (CSS, JavaScript, Images)

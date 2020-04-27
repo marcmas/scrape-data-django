@@ -23,7 +23,6 @@ urlpatterns = [
     path('', include('pages.urls')),
     path('admin/', admin.site.urls),
     path('scrape/', include('scrape.urls')),
-    path('certificate/', include('certificate.urls'))
 ]
 
 if settings.DEBUG:

@@ -9,7 +9,6 @@ class Path(models.Model):
         return self.path
 
 
-# Create your models here.
 class Files(models.Model):
     path = models.CharField(max_length=200, default="path")
     column_one = models.CharField(max_length=50, default="PLX")

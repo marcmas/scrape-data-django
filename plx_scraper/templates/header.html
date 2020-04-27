@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="/"><b>Polipol</b></a>
+  <a class="navbar-brand" href="/"><b>LOGO</b></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -7,22 +7,6 @@
     <ul class="navbar-nav">
       <li class="nav-item active">
         <a class="nav-link" href="{% url 'scrape:scrape' %}">PLX</a>
-      </li>
-      <li class="nav-item dropdown">
-        
-        <a class="nav-link dropdown-toggle {% if not user.is_authenticated %} disabled {% endif %}" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Wyjścia
-        </a>
-        
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="{% url 'certificate:lists' %}">All statements</a>
-          <a class="dropdown-item" href="{% url 'certificate:confirm_lists' %}">Confirm statements</a>
-          <a class="dropdown-item" href="{% url 'certificate:cancle_lists' %}">Cancle statements</a>
-          <a style="font-weight:bold;" class="dropdown-item" href="{% url 'certificate:create' %}">Create statement</a>
-        </div>
-      <li class="nav-item">
-        <a class="nav-link {% if not user.is_authenticated %} disabled {% endif %}" href="{% url 'scrape:scrape' %}">Users</a>
-      </li>
       </li>
     </ul>
   </div>
